@@ -1,6 +1,8 @@
 {
   "name": "Vite + Vue3 Dev Container",
-  "dockerComposeFile": "../docker-compose.yml",
+  "workspaceFolder": "/app",
+  "dockerComposeFile": "D:/Dockerized Full-Stack Development Toolkit/docker-compose.yml",
+  "shutdownAction": "none",
   "service": "frontend",
   "customizations": {
     "vscode": {

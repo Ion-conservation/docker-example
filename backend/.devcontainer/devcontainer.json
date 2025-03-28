@@ -1,9 +1,9 @@
 {
   "name": "Express Dev Container",
-  "dockerComposeFile": "../../docker-compose.yml",
+  "dockerComposeFile": "D:/Dockerized Full-Stack Development Toolkit/docker-compose.yml",
+  "shutdownAction": "none",
   "service": "backend",
   "workspaceFolder": "/app",
-  "shutdownAction": "stopCompose",
   "customizations": {
     "vscode": {
       "settings": {

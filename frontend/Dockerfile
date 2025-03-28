@@ -1,8 +1,7 @@
 FROM node:23.9.0-alpine AS base
 
 # 安装 pnpm
-RUN npm install -g pnpm
-
+RUN npm install -g pnpm 
 WORKDIR /app
 
 COPY package*.json ./

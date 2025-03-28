@@ -4,7 +4,7 @@ services:
     container_name: frontend-${VERSION}
     pull_policy: never # 指定拉取策略
     build:
-      context: ./frontend-app
+      context: ./frontend
       dockerfile: Dockerfile
       target: development
     environment:
@@ -12,7 +12,7 @@ services:
     ports:
       - ${FRONTEND_HOST_PORT}:5173 # 宿主端口：容器端口
     volumes:
-      - ./frontend-app:/app # 挂载本地代码
+      - ./frontend:/app # 挂载本地代码
       - /app/node_modules # 匿名卷，确保容器内的 node_modules 不被覆盖
     networks:
       - fullstack
@@ -40,11 +40,11 @@ services:
     depends_on:
       db:
         condition: service_healthy # 等待 MySQL 健康
-    command: sh -c "pnpm run dev"
+    command: sh -c "pnpm run start"
 
   db:
     image: mysql:8.0.41
-    container_name: mysql-docker
+    container_name: docker-mysql
     networks:
       - fullstack
     ports:
