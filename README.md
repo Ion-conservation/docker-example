@@ -24,7 +24,7 @@
 
 - Dev Container
 
-- SSH Agent
+- SSH Agent （未使用，因为没有在容器内拉取代码，而是使用本地代码）
 
 - 多阶段构建（Multi-stage Builds）
 
@@ -42,25 +42,9 @@
 
 ### 注意事项
 
-1. docker compose build --no-cache --progress=plain 只会创建镜像，不会启动容器，所以 mysql 容器并没有启动。
+1. docker 容器无法热更新，需要配置 vite.config.js 中 server 的 watch 选项。在 Windows Linux 子系统（WSL）上使用 Vite 中提到该问题。
 
-2. docker compose up 会先创建镜像，然后再启动容器。
-
-3. --no-cache 在创建镜像时，会删除缓存，重新创建镜像。
-
-4. --progress=plain: 指定构建过程的输出格式。plain 格式将以纯文本的方式输出构建过程的信息，对于需要查看详细日志的情况非常有用。
-
-5. Dockerfile 中使用 AS builder 标记阶段，下一阶段可以引用上一阶段的内容。
-
-6. 前端需要先引用 Node 镜像，这样才能运行 npm install && npm run build。
-
-7. 命名卷是 docker 管理，挂载卷是自己管理。
-
-8. 使用 --env-file 指定 .env.docker 文件，指定 docker 中的环境变量，与 frontend、backend、mysql 的环境变量区分。
-
-9. docker 容器无法热更新，需要配置 vite.config.js 中 server 的 watch 选项。在 Windows Linux 子系统（WSL）上使用 Vite 中提到该问题。
-
-10. electron 真是踩坑。需要单独设置镜像源，不然一直卡住。`pnpm config set electron_mirror "https://npmmirror.com/mirrors/electron/"`
+2. nodemon 也有热更新问题，也需要使用轮询进行更新。
 
 11. 删除 MYSQL 容器的同时需要删除 MYSQL 卷，否则 MYSQL 容器的数据有问题。
 
