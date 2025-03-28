@@ -2,6 +2,12 @@ FROM node:23.9.0-alpine AS base
 
 # 安装 pnpm
 RUN npm install -g pnpm 
+
+ENV PNPM_HOME=/root/.pnpm
+ENV PATH=$PNPM_HOME:$PATH
+
+RUN chown -R node:node /app
+
 WORKDIR /app
 
 COPY package*.json ./

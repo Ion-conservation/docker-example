@@ -5,6 +5,9 @@ RUN npm install -g pnpm
 ENV PNPM_HOME=/root/.pnpm
 ENV PATH=$PNPM_HOME:$PATH
 
+# 更改 /app 的所有者为 node 用户
+RUN chown -R node:node /app
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -12,9 +15,6 @@ COPY package*.json ./
 RUN pnpm install
 
 COPY . .
-
-# 更改 /app 的所有者为 node 用户
-RUN chown -R node:node /app
 
 EXPOSE 3000
 
