@@ -25,13 +25,13 @@
         "javascript.updateImportsOnFileMove.enabled": "always"
       },
       "extensions": [
-        "dbaeumer.vscode-eslint", // ESLint 支持
-        "esbenp.prettier-vscode", // Prettier 格式化
-        "formulahendry.auto-rename-tag", // 自动重命名标签（通用）
-        "christian-kohler.npm-intellisense", // NPM 智能提示
-        "ms-vscode.vscode-typescript-next", // 增强 TypeScript 支持（可选）
-        "eg2.vscode-npm-script", // 运行 npm/pnpm 脚本
-        "davidanson.vscode-markdownlint" // Markdown 格式化（文档用）
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.npm-intellisense",
+        "ms-vscode.vscode-typescript-next",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens"
       ]
     }
   },

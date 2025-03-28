@@ -24,10 +24,15 @@ export default defineConfig({
       interval: 1000, // 每秒检查一次
     },
     proxy: {
-      '/backend': {
+      '/docker': {
         target: 'http://backend:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/backend/, ''),
+        rewrite: (path) => path.replace(/^\/docker/, ''),
+      },
+      '/local': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/local/, ''),
       },
     }
   },

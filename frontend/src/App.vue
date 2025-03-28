@@ -1,13 +1,19 @@
 <script setup>
-const fetchData = () => {
-  fetch('/backend/users')
-    .then(res => res.json())
+const fetchDocker = () => {
+  fetch('/docker/users')
+    .then(res => res.text())
+    .then(data => console.log(data))
+}
+const fetchlocal = () => {
+  fetch('/local/users')
+    .then(res => res.text())
     .then(data => console.log(data))
 }
 </script>
 
 <template>
-  <button @click="fetchData">fetch</button>
+  <button @click="fetchDocker">fetch in docker</button>
+  <button @click="fetchlocal">fetch in local</button>
 </template>
 
 <style scoped>

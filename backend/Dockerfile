@@ -13,6 +13,9 @@ RUN pnpm install
 
 COPY . .
 
+# 更改 /app 的所有者为 node 用户
+RUN chown -R node:node /app
+
 EXPOSE 3000
 
 FROM base AS development
