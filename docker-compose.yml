@@ -1,0 +1,72 @@
+services:
+  frontend:
+    image: frontend:dev-${VERSION} # 指定镜像名称和标签
+    container_name: frontend-${VERSION}
+    pull_policy: never # 指定拉取策略
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - VITE_API_URL=http://backend:3000
+    ports:
+      - ${FRONTEND_HOST_PORT}:5173 # 宿主端口：容器端口
+    volumes:
+      - ./frontend-app:/app # 挂载本地代码
+      - /app/node_modules # 匿名卷，确保容器内的 node_modules 不被覆盖
+    networks:
+      - fullstack
+    depends_on:
+      - backend
+    command: sh -c "pnpm run dev"
+
+  backend:
+    image: backend:dev-${VERSION}
+    container_name: backend-${VERSION}
+    pull_policy: never
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - ${BACKEND_HOST_PORT}:3000
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - fullstack
+    depends_on:
+      db:
+        condition: service_healthy # 等待 MySQL 健康
+    command: sh -c "pnpm run dev"
+
+  db:
+    image: mysql:8.0.41
+    container_name: mysql-docker
+    networks:
+      - fullstack
+    ports:
+      - ${DB_HOST_PORT}:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql # 初始化数据库
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=yike
+      - MYSQL_PASSWORD=654321
+      - MYSQL_DATABASE=docker_mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: always
+
+volumes:
+  mysql_data:
+
+networks:
+  fullstack:
+    driver: bridge

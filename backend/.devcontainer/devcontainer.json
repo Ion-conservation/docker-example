@@ -1,0 +1,43 @@
+{
+  "name": "Express Dev Container",
+  "dockerComposeFile": "../../docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "eslint.enable": true,
+        "eslint.run": "onType",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "prettier.enable": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "eslint.validate": [
+          "javascript",
+          "typescript"
+        ], // Express 使用 JS/TS
+        "editor.tabSize": 2,
+        "files.autoSave": "onFocusChange",
+        "javascript.updateImportsOnFileMove.enabled": "always"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint", // ESLint 支持
+        "esbenp.prettier-vscode", // Prettier 格式化
+        "formulahendry.auto-rename-tag", // 自动重命名标签（通用）
+        "christian-kohler.npm-intellisense", // NPM 智能提示
+        "ms-vscode.vscode-typescript-next", // 增强 TypeScript 支持（可选）
+        "eg2.vscode-npm-script", // 运行 npm/pnpm 脚本
+        "davidanson.vscode-markdownlint" // Markdown 格式化（文档用）
+      ]
+    }
+  },
+  "forwardPorts": [
+    3000
+  ],
+  "postCreateCommand": "pnpm install", // 与前端一致使用 pnpm
+  "remoteUser": "node"
+}

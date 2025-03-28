@@ -1,0 +1,49 @@
+{
+  "name": "Vite + Vue3 Dev Container",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "frontend",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "eslint.enable": true,
+        "eslint.run": "onType",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "prettier.enable": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "eslint.validate": [
+          "javascript",
+          "typescript",
+          "vue"
+        ],
+        "editor.tabSize": 2,
+        "files.autoSave": "onFocusChange",
+        "volar.autoCompleteRefs": true,
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "vue.codeActions.enabled": true,
+        // 新增 Pinia 和 Vue Router 相关设置
+        "volar.codeLens.references": true, // 显示 Pinia 和 Vue Router 的引用
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": true
+        } // 提升代码补全体验
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint", // ESLint 支持
+        "esbenp.prettier-vscode", // Prettier 格式化
+        "vue.volar", // Volar（Vue 3 支持）
+        "Vue.vscode-typescript-vue-plugin", // TypeScript Vue 支持
+        "formulahendry.auto-rename-tag", // 自动重命名标签
+        "sdras.vue-vscode-snippets", // Vue 代码片段
+        "christian-kohler.npm-intellisense", // NPM 智能提示
+        "pivaszbsnrk.pinia-files-generator" // Pinia 文件生成器（新增）
+      ]
+    }
+  },
+  "remoteUser": "node"
+}
