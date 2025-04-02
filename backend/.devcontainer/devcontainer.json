@@ -39,5 +39,5 @@
     3000
   ],
   "postCreateCommand": "pnpm install", // 与前端一致使用 pnpm
-  "remoteUser": "node"
+  "remoteUser": "root"
 }

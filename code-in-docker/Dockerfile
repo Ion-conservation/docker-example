@@ -13,20 +13,32 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN pnpm install
+ARG VITE_BASE_URL
+ARG VITE_PORT
+
+ENV VITE_API_URL=${VITE_BASE_URL}:${VITE_PORT}
 
 COPY . .
 
-EXPOSE 3000
-
+# development
 FROM base AS development
 
-RUN pnpm install -g nodemon
+RUN pnpm install
 
 CMD ["pnpm", "run", "dev"]
 
-FROM base AS production
+# build
+FROM base AS build
 
-RUN pnpm install pm2 -g
+RUN pnpm run build
 
-CMD ["pm2", "start", "ecosystem.config.js"]
+# production
+FROM nginx:1.27.4 AS production
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=build /app/dist/ /usr/share/nginx/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

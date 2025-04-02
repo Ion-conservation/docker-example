@@ -3,7 +3,7 @@
   "workspaceFolder": "/app",
   "dockerComposeFile": "D:/github/docker-fullstack/docker-compose.yml",
   "shutdownAction": "none",
-  "service": "frontend",
+  "service": "code-in-docker",
   "customizations": {
     "vscode": {
       "settings": {

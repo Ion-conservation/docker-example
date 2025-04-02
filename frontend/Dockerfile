@@ -3,10 +3,12 @@ FROM node:23.9.0-alpine AS base
 # 安装 pnpm
 RUN npm install -g pnpm 
 
+# 设置 pnpm 的全局入口
 ENV PNPM_HOME=/root/.pnpm
+# 设置 pnpm 的全局存储目录
+ENV store-dir=/root/.pnpm-store
+# 设置 pnpm 的环境变量
 ENV PATH=$PNPM_HOME:$PATH
-
-RUN chown -R node:node /app
 
 WORKDIR /app
 

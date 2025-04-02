@@ -10,7 +10,7 @@ services:
     environment:
       - VITE_API_URL=http://backend:3000
     ports:
-      - ${FRONTEND_HOST_PORT}:5173 # 宿主端口：容器端口
+      - 5177:5173 # 宿主端口：容器端口
     volumes:
       - ./frontend:/app # 挂载本地代码
       - /app/node_modules # 匿名卷，确保容器内的 node_modules 不被覆盖
@@ -18,6 +18,20 @@ services:
       - fullstack
     depends_on:
       - backend
+    command: sh -c "pnpm run dev"
+
+  code-in-docker:
+    image: code-in-docker:dev-${VERSION} # 指定镜像名称和标签
+    container_name: code-in-docker-${VERSION}
+    pull_policy: never # 指定拉取策略
+    build:
+      context: ./code-in-docker
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - VITE_API_URL=http://backend:3000
+    ports:
+      - 5178:5173 # 宿主端口：容器端口
     command: sh -c "pnpm run dev"
 
   backend:
@@ -29,7 +43,7 @@ services:
       dockerfile: Dockerfile
       target: development
     ports:
-      - ${BACKEND_HOST_PORT}:3000
+      - 3006:3000
     env_file:
       - .env
     volumes:
@@ -48,7 +62,7 @@ services:
     networks:
       - fullstack
     ports:
-      - ${DB_HOST_PORT}:3306
+      - 3309:3306
     volumes:
       - mysql_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql # 初始化数据库

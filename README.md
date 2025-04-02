@@ -1,5 +1,15 @@
 # Dockerized Full-Stack Development Toolkit
 
+### 使用指南
+
+1. 安装 Docker Desktop。
+
+2. docker compose up --build -d
+
+3. 新建 vs code 窗口，按 F1 > 输入并选择 Dev Containers: Open Folder in Container
+
+4. 访问对应服务地址进行开发
+
 ### **项目概述**
 
 这是一个基于 Docker 的全栈开发工具链，旨在简化前端、后端和数据库的开发与部署流程。通过 Docker Compose 管理容器化服务，结合 Dev Container 实现容器内开发环境预配置，支持高效的代码拉取与依赖管理。项目采用多阶段构建优化镜像大小，并通过 SSH Agent 代理实现安全的代码访问。无论是个人开发者还是团队协作，该工具链都能提供一致、可移植的开发体验。
